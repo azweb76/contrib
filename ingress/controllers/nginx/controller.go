@@ -836,7 +836,7 @@ func (lbc *loadBalancerController) getUpstreamServers(ngxCfg config.Configuratio
 		sort.Sort(ingress.LocationByPath(value.Locations))
 		aServers = append(aServers, value)
 	}
-	sort.Sort(ingress.ServerByName(aServers))
+	sort.Sort(ingress.ServerByNameWithDefault(aServers))
 
 	return aUpstreams, aServers
 }

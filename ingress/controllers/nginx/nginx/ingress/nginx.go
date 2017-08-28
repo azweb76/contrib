@@ -92,6 +92,18 @@ func (c ServerByName) Less(i, j int) bool {
 	return c[i].Name < c[j].Name
 }
 
+// ServerByName sorts server by name
+type ServerByNameWithDefault []*Server
+
+func (c ServerByNameWithDefault) Len() int      { return len(c) }
+func (c ServerByNameWithDefault) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
+func (c ServerByNameWithDefault) Less(i, j int) bool {
+	if c[j].Name == "_" {
+		return false
+	}
+	return c[i].Name < c[j].Name
+}
+
 // Location describes an NGINX location
 type Location struct {
 	Path            string
