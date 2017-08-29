@@ -19,6 +19,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math/rand"
 	"reflect"
 	"sort"
 	"strconv"
@@ -1145,6 +1146,7 @@ func (lbc *loadBalancerController) getEndpoints(
 					Port:        fmt.Sprintf("%v", targetPort),
 					MaxFails:    hz.MaxFails,
 					FailTimeout: hz.FailTimeout,
+					Sort:        rand.Intn(9999),
 				}
 				upsServers = append(upsServers, ups)
 			}

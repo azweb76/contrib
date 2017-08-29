@@ -54,6 +54,7 @@ type UpstreamServer struct {
 	Port        string
 	MaxFails    int
 	FailTimeout int
+	Sort        int
 }
 
 // UpstreamServerByAddrPort sorts upstream servers by address and port
@@ -62,15 +63,16 @@ type UpstreamServerByAddrPort []UpstreamServer
 func (c UpstreamServerByAddrPort) Len() int      { return len(c) }
 func (c UpstreamServerByAddrPort) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
 func (c UpstreamServerByAddrPort) Less(i, j int) bool {
-	iName := c[i].Address
-	jName := c[j].Address
-	if iName != jName {
-		return iName < jName
-	}
+	return c[i].Sort < c[j].Sort
+	// iName := c[i].Address
+	// jName := c[j].Address
+	// if iName != jName {
+	// 	return iName < jName
+	// }
 
-	iU := c[i].Port
-	jU := c[j].Port
-	return iU < jU
+	// iU := c[i].Port
+	// jU := c[j].Port
+	// return iU < jU
 }
 
 // Server describes an NGINX server
